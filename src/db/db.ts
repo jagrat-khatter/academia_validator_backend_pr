@@ -7,7 +7,7 @@ const markSchema = new mongoose.Schema({
     subject: {type: String , required: false} ,
     theory: {type: Number , required: false} ,
     internal: {type: Number , required: false} ,
-    total: {type: Number , required: true} ,
+    total: {type: Number , required: false} ,
     totalInWords: {type: String, required: false} ,
     positionalGrade: {type: String , required: false}
 })
@@ -17,7 +17,7 @@ const schema1 = new mongoose.Schema({
     regNo : {type: String , required: false, unique : true} ,
     studentName : {type : String , required: true , minlength: 1, maxlength: 50} ,
     rollNo: {type : String , required: true , minlength: 1, maxlength : 25} ,
-    dob : {type : String , required: true , minlength:10 , maxlength : 10} ,
+    dob : {type : String , required: false , minlength:10 , maxlength : 10} ,
     fatherGuardianName : {type : String , required: true , minlength: 1, maxlength: 50} ,
     motherName : {type : String , required: true , minlength: 1, maxlength: 50} ,
     schoolName : {type : String , required: true , minlength: 1, maxlength: 120} ,

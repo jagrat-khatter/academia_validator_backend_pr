@@ -1,5 +1,5 @@
 import mongoose from 'mongoose'
-import { db_string } from '../config.js';
+import { db_string } from '../config';
 
 mongoose.connect(db_string);
 const markSchema = new mongoose.Schema({

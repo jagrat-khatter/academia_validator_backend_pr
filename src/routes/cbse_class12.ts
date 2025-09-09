@@ -62,7 +62,8 @@ router.post('/create' ,async (req:Request , res:Response)=>{
         return res.status(500).json({message : "Internal Server error"});
     }
 })
-router.get('/test' ,async (req: Request, res)=>{
+
+router.get('/test' ,async (req: Request, res: Response)=>{
     try 
     {
         const body = req.body ;
@@ -84,26 +85,41 @@ router.get('/test' ,async (req: Request, res)=>{
 
         // console.log(rawBody);
         const finalBody = removeUndefined (rawBody);
-        console.log(finalBody);
+        //console.log(finalBody);
         const response = await cbse_class12_db.findOne({
             rollNo: finalBody.rollNo,
-            studentName: finalBody.studentName  
+            studentName: finalBody.studentName,
+            
         });
 
         // marks array should exactly match with 
-        if(response) {
+        if(!!response) {
             // Convert each subdocument to a plain object and then process with func
             // const response2 = response.toObject();
             const responseMarks = response.marks.map((item: any)=>func2(item.toObject()));
-            console.log(responseMarks);
-            const areEqual = isEqual(responseMarks , finalBody.marks);
+            //console.log(responseMarks);
+            const areEqual = isEqual(responseMarks , finalBody.marks); 
             if(!areEqual) return res.status(200).json({message : "Marks do not match with rollNo and student name"});
-            
+            else if(finalBody["motherName"] != response.motherName) return res.status(200).json({message : "Mother's name on Certificate does not match"});
 
+            else if(finalBody["fatherGuardianName"] != response.fatherGuardianName) return res.status(200).json({message :"Father's name on Certificate does not match"});
 
-            if(!!response) return res.status(200).json({message : "Success"});
+            else if(finalBody["certificateNo"] && response["certificateNo"] && finalBody["certificateNo"]!=response["certificateNo"]) return res.status(200).json({message : "Certificate no. does not match"});
+
+            else if(finalBody["regNo"] && response["regNo"] && finalBody["regNo"]!=response["regNo"]) return res.status(200).json({message : "Reg No. does not match"});
+
+            else if(finalBody["schoolName"] != response.schoolName) return res.status(200).json({message :"School name on Certificate does not match"});
+
+            else if(finalBody["schoolCode"] != response.schoolCode) return res.status(200).json({message :"School code on Certificate does not match"});
+
+            else if(finalBody["dob"] && finalBody["dob"]!=response.dob)  return res.status(200).json({message : "Date of birth is not same according to our records"});
+
+            else if(finalBody["result"] != response.result) return res.status(200).json({message : "Result on Certificate does not match"});
+            else if(finalBody["dated"] != response.dated) return res.status(200).json({message : "Date on Certificate does not match"});
+
+            return res.status(200).json({message : "Success"});
         }
-        else return res.status(200).json({message : "Validation failed"});
+        else return res.status(200).json({message : "Student does not exist in DataBase"});
 
     }
     catch(err){

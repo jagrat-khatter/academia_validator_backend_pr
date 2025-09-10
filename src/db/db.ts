@@ -1,7 +1,7 @@
 import mongoose from 'mongoose'
 import { db_string } from '../config';
 
-mongoose.connect(db_string);
+mongoose.connect(db_string + '/academia_validator');
 const markSchema = new mongoose.Schema({
     subjectCode: {type: String , required: true},
     subject: {type: String , required: false} ,

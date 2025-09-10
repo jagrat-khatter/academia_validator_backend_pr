@@ -2,6 +2,7 @@ import express from 'express'
 import  type {Request  , Response , NextFunction } from 'express'
 import cors from 'cors'
 import {class12_router} from './routes/cbse_class12'
+import { hash_router } from './routes/hash_generation'
 const PORT = process.env.PORT || 3000;
 
 
@@ -10,6 +11,7 @@ app.use(cors());
 app.use(express.json());
 
 app.use('/cbseclass12' , class12_router);
+app.use('/hash' , hash_router);
 
 app.listen(PORT, ()=>{
     console.log(`Listening on port ${PORT}`)

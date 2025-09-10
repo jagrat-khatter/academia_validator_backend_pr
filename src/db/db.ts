@@ -12,6 +12,11 @@ const markSchema = new mongoose.Schema({
     positionalGrade: {type: String , required: false}
 })
 
+const hashSchema = new mongoose.Schema({
+    originTime : {type: Number , required: true} ,
+    hash : {type: String , required: true} 
+})
+
 const schema1 = new mongoose.Schema({
     certificateNo : {type: String , required : false , unique: false } ,
     regNo : {type: String , required: false, unique : false} ,
@@ -29,5 +34,6 @@ const schema1 = new mongoose.Schema({
 
 
 const cbse_class12_db = mongoose.model('cbse_class12' , schema1);
+const hash_DB = mongoose.model('hash_DB' , hashSchema);
 
-export {cbse_class12_db} ;
+export {cbse_class12_db , hash_DB} ;

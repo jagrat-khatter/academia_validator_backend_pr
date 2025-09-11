@@ -38,6 +38,8 @@ router.get('/test' ,async (req: Request , res: Response)=>{
         const hash = req.body.hash;
         const originTime = req.body.originTime;
 
+        console.log(text);
+
         const numStr = originTime.toString();
         const finalStr : string = numStr + salt1 + text + salt2;
         const hashT = await blake3(finalStr);

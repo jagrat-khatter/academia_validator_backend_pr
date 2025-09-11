@@ -115,7 +115,7 @@ router.get('/test' ,async (req: Request, res: Response)=>{
             else if(finalBody["dob"] && finalBody["dob"]!=response.dob)  return res.status(200).json({message : "Date of birth is not same according to our records"});
 
             else if(finalBody["result"] != response.result) return res.status(200).json({message : "Result on Certificate does not match"});
-            else if(finalBody["dated"] != response.dated) return res.status(200).json({message : "Date on Certificate does not match"});
+            else if(finalBody["dated"] && response["dated"] && finalBody["dated"] != response.dated) return res.status(200).json({message : "Date on Certificate does not match"});
 
             return res.status(200).json({message : "Success"});
         }

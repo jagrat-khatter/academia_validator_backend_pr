@@ -50,6 +50,7 @@ router.get('/test' ,async (req: Request , res: Response)=>{
             originTime : originTime ,
             hash : hash
         })
+        console.log(response);
         if(! response) return res.status(200).json({message : "Hash does not match!"});
         else return res.status(200).json({message : "Success"});
 

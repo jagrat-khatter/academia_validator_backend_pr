@@ -44,13 +44,18 @@ router.post('/test' ,async (req: Request , res: Response)=>{
         const finalStr : string = numStr + salt1 + text + salt2;
         const hashT = await blake3(finalStr);
 
+        console.log(hashT);
+        console.log(hash);
+        console.log(originTime);
+
         if(hashT!=hash) return res.status(200).json({message : "Hash does not match!"});
 
         const response = await hash_DB.findOne({
             originTime : originTime ,
             hash : hash
         })
-        console.log(hashT);
+        
+        
         if(! response) return res.status(200).json({message : "Hash does not match!"});
         else return res.status(200).json({message : "Successfuly verified via Cryptographic hash"});
 

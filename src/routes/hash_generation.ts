@@ -31,7 +31,7 @@ router.get('/create' , async (req: Request ,res: Response)=>{
 
 })
 
-router.get('/test' ,async (req: Request , res: Response)=>{
+router.post('/test' ,async (req: Request , res: Response)=>{
     try
     {
         const text = req.body.text;

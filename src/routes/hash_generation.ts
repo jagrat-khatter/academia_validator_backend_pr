@@ -34,6 +34,7 @@ router.get('/create' , async (req: Request ,res: Response)=>{
 router.post('/test' ,async (req: Request , res: Response)=>{
     try
     {
+        console.log(req.body)
         const text = req.body.text;
         const hash = req.body.hash;
         const originTime = req.body.originTime;

@@ -52,7 +52,7 @@ router.get('/test' ,async (req: Request , res: Response)=>{
         })
         console.log(response);
         if(! response) return res.status(200).json({message : "Hash does not match!"});
-        else return res.status(200).json({message : "Success"});
+        else return res.status(200).json({message : "Successfuly verified via Cryptographic hash"});
 
     }
     catch(err){
